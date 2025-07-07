@@ -2,9 +2,10 @@
  -create react app
  -configured tailwind CSS
  -Header
-Login Form 
-Signup Form
+-Login Form 
+-Signup Form
  (use formik library to make big forms inside react applications)
+ -Form validation
 
 
 # Features
