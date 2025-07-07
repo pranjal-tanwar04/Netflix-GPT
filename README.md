@@ -3,7 +3,8 @@
  -configured tailwind CSS
  -Header
 Login Form 
- 
+Signup Form
+ (use formik library to make big forms inside react applications)
 
 
 # Features
