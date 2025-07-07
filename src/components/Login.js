@@ -19,11 +19,7 @@ const Login = () => {
     console.log(email.current.value);
     console.log(password.current.value);
 
-    const message = checkValidData(
-      email.current.value,
-      password.current.value,
-      Username.current.value
-    );
+    const message = checkValidData(email.current.value,password.current.value,Username.current.value);
     setErrorMessage(message);
   };
 
@@ -78,9 +74,7 @@ const Login = () => {
           </button>
 
           <p className="py-4 cursor-pointer" onClick={toggleSignInForm}>
-            {isSignInForm
-              ? "new to netflix? Sign Up Now"
-              : "Already a User continue to Sign In"}
+            {isSignInForm ? "new to netflix? Sign Up Now" : "Already a User continue to Sign In"}
           </p>
         </form>
       </div>
