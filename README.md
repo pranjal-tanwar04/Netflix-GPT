@@ -6,6 +6,11 @@
 -Signup Form
  (use formik library to make big forms inside react applications)
  -Form validation
+ -useref Hook
+ -firebase setup
+ -Deploying Our app to production
+ -create signup in firebase
+
 
 
 # Features
