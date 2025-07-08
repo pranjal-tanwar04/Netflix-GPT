@@ -1,6 +1,8 @@
 import React, { useRef, useState } from "react";
 import Header from "./Header";
 import { checkValidData } from "../utils/validate";
+// import{getauth}
+// import{createUserWithEmailAndPaswword}
 
 //Login fucntion
 const Login = () => {
@@ -29,14 +31,53 @@ const Login = () => {
  //validate the form data
  //if the password , username and email gets wrong it will show on UI immediately
     const message = checkValidData(email.current.value,password.current.value,Username.current.value);
+
+    //firebase logic api used here
     setErrorMessage(message);
     if(!message)return;
+
     // Sign in and Sign up logic
     if(!isSignInForm){
+      //signup logic
+      createUserWithEmailAndPaswword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+
+      .then((userCredential.user)=>{
+        const user =userCredential.user;
+        console.log(user);
+      })
+
+      .catch((error)=>{
+        const errorCode =error.code;
+        const errorMessage =error.message;
+        setErrorMessage(errorCode +"-"+errorMessage);
+      });
  
     }
-    else{
 
+    else{
+      //signIn In Logic
+      signWithEmailAndPassword(
+        auth, 
+        email, 
+        password
+      )
+         .then((userCredential.user)=>{
+
+          //signed in
+        const user =userCredential.user;
+        console.log(user)
+      })
+
+      .catch((error)=>{
+        const errorCode =error.code;
+        const errorMessage =error.message;
+        setErrorMessage(errorCode+"-"+errorMessage)
+      
+      });
     }
       
   };
