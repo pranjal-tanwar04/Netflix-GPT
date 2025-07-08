@@ -45,12 +45,11 @@ const Login = () => {
         password.current.value
       )
 
-      .then((userCredential.user)=>{
+      .then((userCredential.user) => {
         const user =userCredential.user;
         console.log(user);
       })
 
-      .catch((error)=>{
         const errorCode =error.code;
         const errorMessage =error.message;
         setErrorMessage(errorCode +"-"+errorMessage);
@@ -58,7 +57,7 @@ const Login = () => {
  
     }
 
-    else{
+    else {
       //signIn In Logic
       signWithEmailAndPassword(
         auth, 
@@ -78,8 +77,7 @@ const Login = () => {
         setErrorMessage(errorCode+"-"+errorMessage)
       
       });
-    }
-      
+    } 
   };
 
   return (
