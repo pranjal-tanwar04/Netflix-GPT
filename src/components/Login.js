@@ -30,6 +30,15 @@ const Login = () => {
  //if the password , username and email gets wrong it will show on UI immediately
     const message = checkValidData(email.current.value,password.current.value,Username.current.value);
     setErrorMessage(message);
+    if(!message)return;
+    // Sign in and Sign up logic
+    if(!isSignInForm){
+ 
+    }
+    else{
+
+    }
+      
   };
 
   return (

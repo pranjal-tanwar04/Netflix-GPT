@@ -6,7 +6,7 @@
 
     if(!isEmailValid)return "Email ID is not valid";
     if(!isPasswordValid) return "Incorrect Password";
-     if(!isNameValid) return "Enter your correct name";
+    if(!isNameValid) return "Enter your correct name";
 
     return null;
 

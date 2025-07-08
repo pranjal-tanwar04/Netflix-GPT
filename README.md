@@ -10,6 +10,9 @@
  -firebase setup
  -Deploying Our app to production
  -create signup in firebase
+ -Deploying app to production
+ -create sgnup user account(using firebase Web modular api)
+ -
 
 
 
