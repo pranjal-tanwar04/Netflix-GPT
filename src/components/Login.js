@@ -1,79 +1,91 @@
 import React, { useRef, useState } from "react";
 import Header from "./Header";
 import { checkValidData } from "../utils/validate";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import app from "../utils/firebase"; // make sure this initializes Firebase
+// import{getauth}
+// import{createUserWithEmailAndPaswword}
 
-const auth = getAuth(app);
-
+//Login fucntion
 const Login = () => {
+  //using hook useState
+  //signin and signup useState Logic
   const [isSignInForm, setIsSignInForm] = useState(true);
+  //error message for wrong username, email,password
   const [errorMessage, setErrorMessage] = useState(null);
+
 
   const toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
   };
 
+  //usinf useRef for using in buttons and Input for reference so that they can change  its states
   const email = useRef(null);
   const password = useRef(null);
   const Username = useRef(null);
 
-  const handleButtonclick = () => {
-    const message = checkValidData(
-      email.current.value,
-      password.current.value,
-      Username.current?.value
-    );
-    setErrorMessage(message);
-    if (message) return;
 
-    if (!isSignInForm) {
-      // Sign Up
-      createUserWithEmailAndPassword(
+  const handleButtonclick = () => {
+    //this is just used to confirm that id pass are getting loaoded in console.
+    console.log(email.current.value);
+    console.log(password.current.value);
+
+ //validate the form data
+ //if the password , username and email gets wrong it will show on UI immediately
+    const message = checkValidData(email.current.value,password.current.value,Username.current.value);
+
+    //firebase logic api used here
+    setErrorMessage(message);
+    if(!message)return;
+
+    // Sign in and Sign up logic
+    if(!isSignInForm){
+      //signup logic
+      createUserWithEmailAndPaswword(
         auth,
         email.current.value,
         password.current.value
       )
-        .then((userCredential) => {
-          const user = userCredential.user;
-          console.log("Signed up:", user);
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          setErrorMessage(`${errorCode} - ${errorMessage}`);
-        });
-    } else {
-      // Sign In
-      signInWithEmailAndPassword(
-        auth,
-        email.current.value,
-        password.current.value
+
+      .then((userCredential) => {
+        const user =userCredential.user;
+        console.log(user);
+        setErrorMessage(errorCode+"-"+errorMessage);
+      })
+
+        const errorCode =error.code;
+        const errorMessage =error.message;
+        setErrorMessage(errorCode +"-"+errorMessage);
+ 
+   }
+
+    else {
+      //signIn In Logic
+      signWithEmailAndPassword(
+        auth, 
+        email, 
+        password
       )
-        .then((userCredential) => {
-          const user = userCredential.user;
-          console.log("Signed in:", user);
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          setErrorMessage(`${errorCode} - ${errorMessage}`);
-        });
+         .then((userCredential)=>{
+          //signed in
+        const user =userCredential.user(user);
+        console.log(user);
+      })
+
+      .catch((error)=>{
+        const errorCode =error.code;
+        const errorMessage =error.message;
+        setErrorMessage(errorCode+"-"+errorMessage)
+      
+      });
     }
-  };
 
   return (
     <div>
-      <Header />
+      <Header />    {/**header component  is rendered here which contains logo */}
       <div className="absolute">
         <img
           src="https://analyticsindiamag.com/wp-content/uploads/2019/05/apps.55787.9007199266246365.687a10a8-4c4a-4a47-8ec5-a95f70d8852d.jpg"
           alt="logo"
-        />
+        ></img>
       </div>
       <div>
         <form
@@ -94,37 +106,36 @@ const Login = () => {
           )}
 
           <input
-            ref={email}
+            ref={email} //useRef is used here
             type="text"
             placeholder="Email Address"
             className="p-4 my-2 border-2 w-full bg-gray-700"
           />
 
           <input
-            ref={password}
+            ref={password} //useRef is used here
             type="password"
-            placeholder="Password"
+            placeholder="password"
             className="p-4 my-2 border-2 w-full bg-gray-700"
           />
 
           <p className="text-red-500 font-bold py-2">{errorMessage}</p>
 
           <button
-            className="p-4 my-6 cursor:pointer text-white bg-red-700 w-full rounded-lg"
-            onClick={handleButtonclick}
+            className="p-4 my-6 cursor:pointer text-white bg-red-700  w-full rounded-lg"
+            onClick={handleButtonclick}//signup button changes to signin oor vice versa 
           >
             {isSignInForm ? "Sign In" : "Sign Up"}
           </button>
 
-          <p className="py-4 cursor-pointer" onClick={toggleSignInForm}>
-            {isSignInForm
-              ? "New to Netflix? Sign Up Now"
-              : "Already a user? Sign In"}
+          <p className="py-4 cursor-pointer" onClick={toggleSignInForm}> {/*toggle means switch between two states*/}
+            {isSignInForm ? "new to netflix? Sign Up Now" : "Already a User continue to Sign In"}
           </p>
         </form>
       </div>
     </div>
   );
+};
 };
 
 export default Login;
