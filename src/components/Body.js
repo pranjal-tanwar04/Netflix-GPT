@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Browse from "./Browse";
 import Login from "./Login"
@@ -14,6 +14,21 @@ const Body = () =>{
     element: <Browse />
   }
 ]);
+
+useEffect(()=>{
+  onAuthStateChanged(auth, (user)=>{
+    if(user){
+      //user is signed in, see docs for a list of available properties
+      //https://firebase.google.com/docs/reference/js/auth.user
+      const uid =user.uid;
+      //...
+    }else{
+      //user is signed out
+      //....
+    }
+  });
+
+},[])
 
   return (
   <div>

@@ -12,6 +12,8 @@
  -create signup in firebase
  -Deploying app to production
  -create sgnup user account(using firebase Web modular api)
+ -created reduxx store 
+ -bounded the body inside the provider because we have used  redux store.
  -
 
 
