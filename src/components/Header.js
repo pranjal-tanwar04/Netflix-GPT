@@ -2,7 +2,7 @@ import React from "react";
 
 const Header = () => {
   return (
-    <div className="absolute px-6 bg-gradient-to-b from-black z-30">
+    <div className="absolute w-screen px-8 by-2 bg-gradient-to-b from-black z-10">
       <img
         className="w-40"
         src="https://img.icons8.com/?size=200&id=38244&format=png&color=FF1010"//netflix logo
